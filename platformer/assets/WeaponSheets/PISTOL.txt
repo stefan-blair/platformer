@@ -1,0 +1,8 @@
+ammunition 0
+bulletSpeed 10
+damage 5
+id 1
+price 500
+range 200
+rechargeTime 400
+type PISTOL

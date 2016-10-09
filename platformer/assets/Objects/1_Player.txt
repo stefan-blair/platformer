@@ -1,0 +1,7 @@
+player
+int x 600
+int y 0
+int width 31
+int height 31
+string file assets/Textures/plant.jpg
+end

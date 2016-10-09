@@ -1,0 +1,20 @@
+player
+end
+attr
+money 8225
+skill_points 0
+walkSpeed 3
+runSpeed 4
+weight 2
+jumpHeight 18
+health 10
+end
+melee_weapon
+type AXE
+price 900
+id 0
+range 0
+damage 7
+rechargeTime -110
+position 0
+end

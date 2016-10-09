@@ -1,0 +1,47 @@
+new horizontalplatform
+int x 200
+int y 200
+int width 31
+int height 31
+int walkSpeed 1
+int range 500
+string file assets/Textures/plant.jpg
+end
+
+new enemy
+int x 100
+int y 0
+int width 31
+int height 31
+int walkSpeed 1
+int range 500
+string file assets/Textures/plant.jpg
+end
+
+new enemy
+int x 200
+int y 0
+int width 31
+int height 31
+int walkSpeed 1
+int range 500
+string file assets/Textures/plant.jpg
+end
+
+new enemy
+int x 300
+int y 0
+int width 31
+int height 31
+int walkSpeed 1
+int range 1
+string file assets/Textures/plant.jpg
+end
+
+new finishblock
+int x 900
+int y 370
+int width 31
+int height 31
+string file assets/Textures/plant.jpg
+end

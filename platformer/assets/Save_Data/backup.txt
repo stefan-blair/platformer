@@ -1,0 +1,33 @@
+player
+end
+attr
+money 1000
+skill_points 0
+walkSpeed 2
+runSpeed 4
+weight 2
+jumpHeight 18
+health 10
+end
+
+projectile_weapon
+type PISTOL
+price 0
+id 0
+range 10
+damage 2
+bulletSpeed 1
+ammunition 100
+rechargeTime 0
+position 1
+end
+
+melee_weapon
+type KNIFE
+price 0
+id 1
+range 20
+damage 2
+rechargeTime 0
+position 0
+end

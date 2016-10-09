@@ -1,0 +1,8 @@
+ammunition 0
+bulletSpeed 4
+damage 20
+id 1
+price 400
+range 200
+rechargeTime 2000
+type BOW

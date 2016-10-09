@@ -1,0 +1,6 @@
+damage 4
+id 1
+price 200
+range 40
+rechargeTime 120
+type SWORD

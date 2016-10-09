@@ -1,0 +1,6 @@
+damage 21
+id 1
+price 100
+range 20
+rechargeTime 80
+type KNIFE
