@@ -1,11 +1,14 @@
-#include<string>
-#include<vector>
-#include<SDL.h>
-#include <SDL_ttf.h>
-#include<SDL_image.h>
+#include <string>
+#include <vector>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+
+
 #ifndef __TextureManager__
 #define __TextureManager__
 #pragma once
+
 class TextureManager
 {
 public:

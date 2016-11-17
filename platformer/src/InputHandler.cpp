@@ -1,6 +1,7 @@
 #include"InputHandler.h"
 
-InputHandler::InputHandler() :_mousePosition(new Vector2D(0,0))
+InputHandler::InputHandler() :
+	_mousePosition(new Vector2D(0,0))
 {
 	_keyState = SDL_GetKeyboardState(0);
 	_mouseButtonStates[0] = false;

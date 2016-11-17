@@ -1,7 +1,7 @@
 player
-int x 600
+int x 20
 int y 0
 int width 31
 int height 31
-string file assets/Textures/plant.jpg
+string file assets/Textures/godoat.png
 end

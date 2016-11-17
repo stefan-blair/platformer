@@ -1,13 +1,21 @@
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include "Game.h"
 #include "InputHandler.h"
 #include "MenuState.h"
 #include "PlayState.h"
 #include "CreatorFactory.h"
 
-Game::Game()
+Game::Game() :
+	_window(nullptr),
+	_renderer(nullptr),
+	_texture(nullptr),
+	_gameStateMachine(nullptr),
+	_player(nullptr),
+	_running(false),
+	_width(0),
+	_height(0)
 {
 }
 

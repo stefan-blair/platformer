@@ -1,12 +1,35 @@
-#include <SDL.h>
-#include <SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
 #include"TextureManager.h"
 #include "SDLGameObject.h"
 #include "Game.h"
 #include "CollisionDetection.h"
 #include "Camera.h"
 
-SDLGameObject::SDLGameObject() : GameObject(), _mortal(true)
+SDLGameObject::SDLGameObject() :
+	GameObject(),
+	_mortal(true),
+	_id(0),
+	_skill_points(0),
+	_jumpHeight(0),
+	_runSpeed(0),
+	_width(0),
+	_height(0),
+	_weight(0),
+	_walkSpeed(0),
+	_range(0),
+	_currentRow(0),
+	_currentFrame(0),
+	_falling(false),
+	_jumping(false),
+	_tileCollide(false),
+	_alive(false),
+	_currentObject(nullptr),
+	_playerLocation(nullptr),
+	_direction(LEFT),
+	_health(0),
+	_money(0)
 {
 }
 

@@ -1,6 +1,6 @@
 #include "TextureManager.h"
-#include <iostream>
 #include "Game.h"
+
 
 TextureManager::TextureManager()
 {
@@ -20,6 +20,7 @@ TextureManager* TextureManager::Instance(){
 
 short TextureManager::load(std::string fileName, SDL_Renderer* renderer)
 {
+
 	for (int i = 0; i < _files.size(); ++i){
 		if (_files[i] == fileName)
 			return i;
@@ -51,7 +52,7 @@ short TextureManager::loadFont(std::string fileName, SDL_Renderer* renderer)
 	}
 	_fontfiles.push_back(fileName);
 
-	TTF_Font* font = TTF_OpenFont(("assets/Fonts/"+fileName+".ttf").c_str(), 12);
+	TTF_Font* font = TTF_OpenFont(("assets/Fonts/"+fileName+".TTF").c_str(), 12);
 	if (font != 0)
 	{
 		_fonts.push_back(font);

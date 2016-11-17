@@ -1,3 +1,8 @@
+#include <cstdlib>
+
+#include <string>
+#include <sstream>
+
 #include "LevelSelectState.h"
 #include "Save.h"
 #include "StateParser.h"
@@ -6,13 +11,16 @@
 #include "ShopState.h"
 #include "Camera.h"
 
+
 LevelSelectState::LevelSelectState() :
-GameState(),
-_increase_level(&_increase_level_pressed),
-_decrease_level(&_decrease_level_pressed),
-_play(&_play_pressed),
-_back(&_back_pressed),
-_message("Select Level")
+	GameState(),
+	_increase_level(&_increase_level_pressed),
+	_decrease_level(&_decrease_level_pressed),
+	_play(&_play_pressed),
+	_back(&_back_pressed),
+	_message("Select Level"),
+	_max_level(0),
+	_current_level_index(0)
 {}
 
 LevelSelectState::~LevelSelectState()
@@ -26,11 +34,13 @@ void LevelSelectState::update(){
 
 	if (_increase_level_pressed && _current_level_index < _max_level){
 		++_current_level_index;
-		_current_level.setString(std::to_string(_current_level_index));
+		std::string current_level = std::to_string(_current_level_index);
+		_current_level.setString(current_level);
 	}
 	else if (_decrease_level_pressed && _current_level_index > 1){
 		--_current_level_index;
-		_current_level.setString(std::to_string(_current_level_index));
+		std::string current_level = std::to_string(_current_level_index);
+		_current_level.setString(current_level);
 	}
 	else if (_play_pressed){
 		Save::SetLevel(_current_level_index);
@@ -54,7 +64,7 @@ bool LevelSelectState::onEnter(){
 	Camera::prepMenuState(244, 500);
 	std::string level;
 	StateParser::getCurrentLevel(level);
-	_current_level_index = _max_level = stoi(level);
+	_current_level_index = _max_level = std::stoi(level);
 
 	_increase_level.init(new LoaderParams(172, 100, 72, 72, TextureManager::Instance()->load("assets/Textures/startButtonSprite.png",
 		Game::Instance()->getRenderer())));
@@ -65,8 +75,12 @@ bool LevelSelectState::onEnter(){
 	_back.init(new LoaderParams(22, 300, 201, 72, TextureManager::Instance()->load("assets/Textures/startButtonSprite.png",
 		Game::Instance()->getRenderer())));
 	
-	_title.init(LoaderParams(18, 0, 220, 70, TextureManager::Instance()->loadFont("8-BIT WONDER", Game::Instance()->getRenderer())), _message);
-	_current_level.init(LoaderParams(110, 100, 30, 60, TextureManager::Instance()->loadFont("8-BIT WONDER", Game::Instance()->getRenderer())), std::to_string(_current_level_index));
+	LoaderParams titleLoaderParams(18, 0, 220, 70, TextureManager::Instance()->loadFont("8-BIT WONDER", Game::Instance()->getRenderer()));
+	_title.init(titleLoaderParams, _message);
+
+	LoaderParams currentLevelLoaderParams(110, 100, 30, 60, TextureManager::Instance()->loadFont("8-BIT WONDER", Game::Instance()->getRenderer()));
+	std::string currentLevel = std::to_string(_current_level_index);
+	_current_level.init(currentLevelLoaderParams, currentLevel);
 
 	return true;
 }

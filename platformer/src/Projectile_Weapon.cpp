@@ -4,18 +4,25 @@
 #include "Camera.h"
 
 Projectile_Weapon::Projectile_Weapon(SDLGameObject* owner) :
-_current_bullet(0),
-_free_bullets(0),
-_active_bullets(0),
-_timer(SDL_GetTicks()),
-_owner(owner)
+	_current_bullet(0),
+	_free_bullets(0),
+	_active_bullets(0),
+	_timer(SDL_GetTicks()),
+	_owner(owner),
+	_damage(0),
+	_price(0),
+	_range(0),
+	_bulletSpeed(0),
+	_ammunition(0),
+	_rechargeTime(0),
+	_id(0)
 {
 }
 
 
 Projectile_Weapon::~Projectile_Weapon()
 {
-	//DELETE ALL BULLETS SON!
+	//DELETE ALL BULLETS
 }
 
 void Projectile_Weapon::init(Projectile_Weapon_Values& values){
@@ -158,8 +165,13 @@ void Projectile_Weapon::setPrice(int price){
 	_price = price;
 }
 
-Bullet::Bullet(){
-
+Bullet::Bullet() :
+	_speed(0),
+	_distance(0),
+	_x(0),
+	_y(0),
+	_active(false)
+{
 }
 Bullet::~Bullet(){
 

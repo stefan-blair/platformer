@@ -12,7 +12,12 @@ Shop_Item::Shop_Item()
 	delete_clicked(false),
 	upgrade_clicked(false),
 	delete_button(&delete_clicked),
-	upgrade_button(&upgrade_clicked)
+	upgrade_button(&upgrade_clicked),
+	melee_weapon(nullptr),
+	projectile_weapon(nullptr),
+	x(0),
+	y(0),
+	type(0)
 {
 }
 int Shop_Item::width = 80;
@@ -22,7 +27,13 @@ ShopState::ShopState()
 	: 
 	GameState(), 
 	_continueButton(&_continue),
-	_released(false)
+	_released(false),
+	_potion_end(0),
+	_projectile_end(0),
+	_melee_end(0),
+	_scroll_offset(0),
+	_itemHeight(0),
+	_font_id(0)
 {
 }
 
@@ -84,7 +95,8 @@ void ShopState::render(){
 		_player_items[i].upgrade_button.draw();
 		TextureManager::Instance()->writeText(_font_id, _player_items[i].x, _player_items[i].y, 80, 40, toWrite, Game::Instance()->getRenderer());
 	}
-	TextureManager::Instance()->writeText(_font_id, 450, 10, 60, 20, std::to_string(_player.getMoney()), Game::Instance()->getRenderer());
+	std::string playerMoney = std::to_string(_player.getMoney());
+	TextureManager::Instance()->writeText(_font_id, 450, 10, 60, 20, playerMoney, Game::Instance()->getRenderer());
 }
 
 bool ShopState::onEnter(){

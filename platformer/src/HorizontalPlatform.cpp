@@ -1,9 +1,9 @@
 #include "HorizontalPlatform.h"
 
 
-HorizontalPlatform::HorizontalPlatform() : SDLGameObject()
+HorizontalPlatform::HorizontalPlatform() :
+	SDLGameObject()
 {
-	_mortal = false;
 }
 
 

@@ -28,7 +28,7 @@ private:
 	~StateParser();
 	static std::string getNextWord(std::string* line);
 
-	static int _currentIndex;
+	static size_t _currentIndex;
 	static bool _end;
 };
 

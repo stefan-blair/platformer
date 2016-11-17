@@ -1,8 +1,8 @@
-#include<SDL.h>
-#include"TextureManager.h"
-#include"SDLGameObject.h"
-#include"Button.h"
-#include"Player.h"
+#include <SDL2/SDL.h>
+#include "TextureManager.h"
+#include "SDLGameObject.h"
+#include "Button.h"
+#include "Player.h"
 #pragma once
 
 class MenuState : public GameState

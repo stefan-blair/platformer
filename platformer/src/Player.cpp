@@ -6,10 +6,11 @@
 #include "Melee_Weapon.h"
 #include "Projectile_Weapon.h"
 
-Player::Player() : SDLGameObject()
+Player::Player() :
+	SDLGameObject(),
+	_current_weapon(0)
 {
-	_current_weapon = 0;
-
+	_alive = true;
 	for (int i = 0; i < 3; i++){
 		_projectile_weapon[i] = nullptr;
 		_melee_weapon[i] = nullptr;
@@ -124,7 +125,7 @@ void Player::clean(){
 }
 
 void Player::equip(int index, Projectile_Weapon* projectile_weapon, Melee_Weapon* melee_weapon){
-
+	// player's position is invalid.  break in the player creator
 	if (melee_weapon != 0){
 		_melee_weapon[index] = melee_weapon;
 		_weapon_map[index] = 2;

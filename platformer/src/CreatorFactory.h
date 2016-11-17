@@ -19,8 +19,8 @@ public:
 private:
 	static void registerType(std::string id, BaseCreator* creator);
 
-	static const int			_number_of_objects;
-	static int					_creator_interval;
+	static const size_t			_number_of_objects;
+	static size_t				_creator_interval;
 	static std::string			_creatorID[];
 	static BaseCreator*			_creators[];
 };

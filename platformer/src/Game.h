@@ -1,10 +1,10 @@
-#include<iostream>
-#include<SDL.h>
-#include<SDL_image.h>
-#include"GameStateMachine.h"
-#include"TextureManager.h"
-#include"LoaderParams.h"
-#include"Player.h"
+#include <iostream>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include "GameStateMachine.h"
+#include "TextureManager.h"
+#include "LoaderParams.h"
+#include "Player.h"
 
 #pragma once
 #ifndef __Game__

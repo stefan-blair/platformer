@@ -3,9 +3,15 @@
 #include "LoaderParams.h"
 #include "Camera.h"
 
-Melee_Weapon::Melee_Weapon(SDLGameObject* owner) : _timer(SDL_GetTicks())
+Melee_Weapon::Melee_Weapon(SDLGameObject* owner) :
+	_timer(SDL_GetTicks()),
+	_owner(owner),
+	_rechargeTime(0),
+	_price(0),
+	_damage(0),
+	_range(0),
+	_id(0)
 {
-	_owner = owner;
 }
 
 

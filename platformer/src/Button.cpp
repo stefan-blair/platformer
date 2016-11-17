@@ -3,10 +3,12 @@
 #include "InputHandler.h"
 
 Button::Button(bool* clicked) : 
-SDLGameObject(), 
-_mousePos(InputHandler::Instance()->getMousePosition()), 
-_clicked(clicked), 
-_released(false)
+	SDLGameObject(),
+	_mousePos(InputHandler::Instance()->getMousePosition()),
+	_clicked(clicked),
+	_released(false),
+	_cameraX(0),
+	_cameraY(0)
 {
 }
 

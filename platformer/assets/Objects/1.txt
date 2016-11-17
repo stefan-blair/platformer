@@ -3,7 +3,7 @@ int x 100
 int y 0
 int width 31
 int height 31
-string file assets/Textures/plant.jpg
+string file assets/Textures/mole.png
 end
 
 new enemy
@@ -11,7 +11,7 @@ int x 400
 int y 0
 int width 31
 int height 31
-string file assets/Textures/plant.jpg
+string file assets/Textures/mole.png
 end
 
 new enemy
@@ -19,7 +19,7 @@ int x 300
 int y 0
 int width 31
 int height 31
-string file assets/Textures/plant.jpg
+string file assets/Textures/mole.png
 end
 
 new enemy
@@ -27,7 +27,7 @@ int x 150
 int y 0
 int width 31
 int height 31
-string file assets/Textures/plant.jpg
+string file assets/Textures/mole.png
 end
 
 new enemy
@@ -35,7 +35,7 @@ int x 450
 int y 0
 int width 31
 int height 31
-string file assets/Textures/plant.jpg
+string file assets/Textures/mole.png
 end
 
 new enemy
@@ -43,7 +43,7 @@ int x 350
 int y 0
 int width 31
 int height 31
-string file assets/Textures/plant.jpg
+string file assets/Textures/mole.png
 end
 
 new finishblock

@@ -55,7 +55,9 @@ bool GameOverState::onEnter(){
 		Game::Instance()->getRenderer())));
 	_menu.init(new LoaderParams(0, 300, 201, 72, TextureManager::Instance()->load("assets/Textures/startButtonSprite.png",
 		Game::Instance()->getRenderer())));
-	_title.init(LoaderParams(0, 0, 200, 50,TextureManager::Instance()->loadFont("8-BIT WONDER", Game::Instance()->getRenderer())), _text_message);
+
+	LoaderParams params(0, 0, 200, 50, TextureManager::Instance()->loadFont("8-BIT WONDER", Game::Instance()->getRenderer()));
+	_title.init(params, _text_message);
 	
 	return true;
 }

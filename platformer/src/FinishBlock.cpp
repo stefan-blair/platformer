@@ -4,10 +4,9 @@
 #include "Save.h"
 #include "StateParser.h"
 
-FinishBlock::FinishBlock()
-	: SDLGameObject()
+FinishBlock::FinishBlock() :
+	SDLGameObject()
 {
-	_mortal = false;
 }
 
 

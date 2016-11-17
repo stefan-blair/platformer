@@ -1,6 +1,9 @@
+#include <algorithm>
+
 #include "StateParser.h"
 #include "Melee_Weapon_Types.h"
 #include "FinishBlock.h"
+
 
 StateParser::StateParser()
 {
@@ -10,8 +13,21 @@ StateParser::StateParser()
 StateParser::~StateParser()
 {
 }
-int StateParser::_currentIndex = 0;
+size_t StateParser::_currentIndex = 0;
 bool StateParser::_end = false;
+
+bool readLineFromFile(std::ifstream& file, std::string& str)
+{
+	if (std::getline(file, str))
+	{
+		// remove invalid characters (\r = carriage return and \n = new line)
+		str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());
+		str.erase(std::remove(str.begin(), str.end(), '\n'), str.end());
+
+		return true;
+	}
+	return false;
+}
 
 void StateParser::loadStateObjects(std::string fileName, Player* player, std::vector<SDLGameObject*>* objects){
 	std::ifstream file("assets/Objects/"+fileName+".txt");
@@ -22,7 +38,7 @@ void StateParser::loadStateObjects(std::string fileName, Player* player, std::ve
 	int x, y, width, height;
 	SDLGameObject_Values attributes;
 
-	while (std::getline(file, str))
+	while (readLineFromFile(file, str))
 	{
 		if (getNextWord(&str) == "new"){
 			type = getNextWord(&str);
@@ -31,7 +47,8 @@ void StateParser::loadStateObjects(std::string fileName, Player* player, std::ve
 			_end = false;
 			_currentIndex = 0;
 			while (running){
-				std::getline(file, str);
+				readLineFromFile(file, str);
+
 				currentWord = getNextWord(&str);
 				if (currentWord == "int"){
 					currentWord = getNextWord(&str);
@@ -61,19 +78,19 @@ void StateParser::loadStateObjects(std::string fileName, Player* player, std::ve
 					else if (currentWord == "range")
 						variable = &attributes.range;
 					*variable = stoi(getNextWord(&str));
-				}
-				
-				else if (currentWord == "string"){
+				} else if (currentWord == "string"){
 					currentWord = getNextWord(&str);
 					if (currentWord == "file"){
 						textureFile = getNextWord(&str);
+
 					}
-				}
-				else if (currentWord == "end"){
+				} else if (currentWord == "end"){
 					running = false;
 
-					objects->push_back(GameObjectFactory::create(type));
-					objects->back()->SDLGameObject::init(new LoaderParams(x, y, width, height, TextureManager::Instance()->load(textureFile, Game::Instance()->getRenderer())));
+					SDLGameObject* gameObject = GameObjectFactory::create(type);
+					objects->push_back(gameObject);
+					LoaderParams* params = new LoaderParams(x, y, width, height, TextureManager::Instance()->load(textureFile, Game::Instance()->getRenderer()));
+					objects->back()->SDLGameObject::init(params);
 					objects->back()->SDLGameObject::initAttr(attributes);
 					objects->back()->setPlayerLocation(player->getPosition());
 				}
@@ -86,9 +103,10 @@ void StateParser::loadStateObjects(std::string fileName, Player* player, std::ve
 }
 
 void StateParser::loadStateTiles(std::string fileName,  Tiles* tiles){
+	std::cout << "loading state tiles: " << fileName << ".txt" << std::endl;
 	std::ifstream mapFile("assets/Maps/" + fileName + ".txt");
 	std::string str;
-	std::getline(mapFile, str);
+	readLineFromFile(mapFile, str);
 
 	tiles->init(new LoaderParams(stoi(getNextWord(&str)), stoi(getNextWord(&str)), 31, 31, TextureManager::Instance()->load("assets/Textures/tiles.jpg", Game::Instance()->getRenderer())));
 	_end = false;
@@ -96,9 +114,8 @@ void StateParser::loadStateTiles(std::string fileName,  Tiles* tiles){
 	int y = 0;
 	int x;
 
-	int frame = 0;
 	tile* current_tile;
-	while (std::getline(mapFile, str))
+	while (readLineFromFile(mapFile, str))
 	{
 		x = -1;
 		std::string current_word = getNextWord(&str);
@@ -106,20 +123,18 @@ void StateParser::loadStateTiles(std::string fileName,  Tiles* tiles){
 			++x;
 			if (current_word[0] == '~'){
 				tiles->addTile(0);
-				goto END;
+			} else {
+				current_tile = new tile;
+				tiles->addTile(current_tile);
+				current_tile->_row = current_word[0] - 48;
+				current_tile->_frame = current_word[1] - 48;
 			}
-			current_tile = new tile;
-			tiles->addTile(current_tile);
-			current_tile->_row = current_word[0] - 48;
-			current_tile->_frame = current_word[1] - 48;
-		END:
 			current_word = getNextWord(&str);
 		}
 		_end = false;
 		_currentIndex = 0;
 		++y;
 	}
-
 }
 
 void StateParser::loadStatePlayerAttr(Player* player){
@@ -134,7 +149,7 @@ void StateParser::loadStatePlayerAttr(Player* player){
 	Projectile_Weapon* current_projectile_weapon;
 
 	_currentIndex = 0;
-	while (std::getline(file, str))
+	while (readLineFromFile(file, str))
 	{
 		_currentIndex = 0;
 		std::string baseWord = getNextWord(&str);
@@ -144,7 +159,7 @@ void StateParser::loadStatePlayerAttr(Player* player){
 			_end = false;
 			_currentIndex = 0;
 			while (running){
-				std::getline(file, str);
+				readLineFromFile(file, str);
 				currentWord = getNextWord(&str);
 				int* variable = 0;
 				if (currentWord == "end"){
@@ -185,7 +200,7 @@ void StateParser::loadStatePlayerAttr(Player* player){
 			while (running){
 				_end = false;
 				_currentIndex = 0;
-				std::getline(file, str);
+				readLineFromFile(file, str);
 				currentWord = getNextWord(&str);
 				int* variable = 0;
 				if (currentWord == "end"){
@@ -231,7 +246,7 @@ void StateParser::loadStatePlayerAttr(Player* player){
 			while (running){
 				_end = false;
 				_currentIndex = 0;
-				std::getline(file, str);
+				readLineFromFile(file, str);
 				currentWord = getNextWord(&str);
 				int* variable = 0;
 				if (currentWord == "end"){
@@ -282,7 +297,7 @@ void StateParser::loadStatePlayer(std::string level, Player* player){
 	int x, y, width, height;
 
 	_currentIndex = 0;
-	while (std::getline(file, str))
+	while (readLineFromFile(file, str))
 	{
 		_currentIndex = 0;
 		std::string baseWord = getNextWord(&str);
@@ -292,7 +307,7 @@ void StateParser::loadStatePlayer(std::string level, Player* player){
 			_end = false;
 			_currentIndex = 0;
 			while (running){
-				std::getline(file, str);
+				readLineFromFile(file, str);
 				currentWord = getNextWord(&str);
 				if (currentWord == "int"){
 					currentWord = getNextWord(&str);
@@ -334,7 +349,7 @@ void StateParser::getCurrentLevel(std::string& level){
 
 	std::string str;
 
-	std::getline(file, str);
+	readLineFromFile(file, str);
 	level = str;
 }
 
@@ -345,7 +360,7 @@ void StateParser::readMeleeValues(std::string& type, Melee_Weapon_Values& values
 	std::string currentword;
 	_currentIndex = 0;
 	_end = false;
-	while (std::getline(file, str))
+	while (readLineFromFile(file, str))
 	{
 		_currentIndex = 0;
 		_end = false;
@@ -377,7 +392,7 @@ void StateParser::readProjectileValues(std::string& type, Projectile_Weapon_Valu
 	std::string currentword;
 	_currentIndex = 0;
 	_end = false;
-	while (std::getline(file, str))
+	while (readLineFromFile(file, str))
 	{
 		_currentIndex = 0;
 		_end = false;
@@ -416,7 +431,7 @@ std::string StateParser::getNextWord(std::string* line){
 	if (_currentIndex == line->length())
 		_end = true;
 	int beginningIndex = _currentIndex;
-	for (_currentIndex; _currentIndex < line->length(); ++_currentIndex){
+	for (; _currentIndex < line->length(); ++_currentIndex){
 		if ((*line)[_currentIndex] == ' '){
 			++_currentIndex;
 			return line->substr(beginningIndex, _currentIndex - beginningIndex-1);

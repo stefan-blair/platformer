@@ -6,15 +6,6 @@ Enemy::Enemy()
 	: SDLGameObject(),
 	_weapon(this)
 {
-	_walkSpeed = 1;
-	_runSpeed = 2;
-	_weight = 1;
-	_jumpHeight = 10;
-	_range = 150;
-	_health = 10;
-
-	_money = 10;
-	
 	Projectile_Weapon_Values values;
 	std::string type = "Pistol";
 

@@ -1,6 +1,9 @@
 #include "Potions.h"
 
-Potion::Potion(){}
+Potion::Potion() :
+	_price(0)
+{
+}
 Potion::~Potion(){}
 int Potion::getPrice(){
 	return _price;

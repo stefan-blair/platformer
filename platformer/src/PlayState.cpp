@@ -11,7 +11,6 @@ PlayState::PlayState()
 {
 	_level = new Level();
 	_level->init();
-	//_level->incrementLevel(1);
 }
 
 

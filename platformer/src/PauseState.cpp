@@ -1,3 +1,5 @@
+#include <string>
+
 #include "PauseState.h"
 #include "SettingState.h"
 #include "MenuState.h"
@@ -7,10 +9,10 @@
 #include "LoaderParams.h"
 
 PauseState::PauseState():
-GameState(),
-_resume(&_resume_clicked),
-_settings(&_settings_clicked),
-_menu_return(&_menu_return_clicked)
+	GameState(),
+	_resume(&_resume_clicked),
+	_settings(&_settings_clicked),
+	_menu_return(&_menu_return_clicked)
 {
 }
 
@@ -25,7 +27,8 @@ bool PauseState::onEnter(){
 	Camera::prepMenuState(201, 600);
 	
 	std::string message = "Paused";
-	_title.init(LoaderParams(0, 0, 200, 80, TextureManager::Instance()->loadFont("8-BIT WONDER", Game::Instance()->getRenderer())), message);
+	LoaderParams titleParams(0, 0, 200, 80, TextureManager::Instance()->loadFont("8-BIT WONDER", Game::Instance()->getRenderer()));
+	_title.init(titleParams, message);
 	_resume.init(new LoaderParams(0, 100, 201, 72, TextureManager::Instance()->load("assets/Textures/startButtonSprite.png",
 		Game::Instance()->getRenderer())));
 	_settings.init(new LoaderParams(0, 200, 201, 72, TextureManager::Instance()->load("assets/Textures/startButtonSprite.png",

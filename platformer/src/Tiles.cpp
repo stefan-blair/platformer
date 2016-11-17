@@ -1,7 +1,12 @@
 #include "Tiles.h"
 #include "Camera.h"
 
-Tiles::Tiles()
+Tiles::Tiles() :
+	_id(0),
+	_width(0),
+	_height(0),
+	_maxX(0),
+	_maxY(0)
 {
 }
 
@@ -12,13 +17,11 @@ Tiles::~Tiles()
 
 void Tiles::init(LoaderParams* params)
 {
-	_maxY = params->getX();
-	_maxX = params->getY();
+	_maxX = params->getX();
+	_maxY = params->getY();
 	_id = params->getId();
 	_width = params->getWidth();
 	_height = params->getHeight();
-
-	int max = _maxX*_maxY;
 }
 
 inline bool isBetween(int a, int b, int c){
@@ -42,7 +45,7 @@ void Tiles::update(){
 
 }
 void Tiles::clean(){
-	for (int i = 0; i < _tiles.size(); i++){
+	for (size_t i = 0; i < _tiles.size(); i++){
 		delete _tiles[i];
 	}
 	_tiles.clear();

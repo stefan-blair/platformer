@@ -10,7 +10,15 @@ UpgradeState::UpgradeState()
 	GameState(),
 	_released(false),
 	_back_pressed(false),
-	_back_button(&_back_pressed)
+	_back_button(&_back_pressed),
+	_projectile_weapon(nullptr),
+	_melee_weapon(nullptr),
+	_player(nullptr),
+	_shopstate(nullptr),
+	_weapon_price(nullptr),
+	_font_id(0),
+	_type(0),
+	_number_of_attributes(0)
 {
 }
 
